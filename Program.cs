@@ -3,6 +3,16 @@ using AoC_2023.Solutions.Day2;
 using AoC_2023.Solutions.Day3;
 using AoC_2023.Solutions.Day4;
 using AoC_2023.Solutions.Day5;
+using AoC_2023.Solutions.Day6;
+using AoC_2023.Solutions.Day7;
+using AoC_2023.Solutions.Day8;
+using AoC_2023.Solutions.Day9;
+using AoC_2023.Solutions.Day10;
+using AoC_2023.Solutions.Day11;
+using AoC_2023.Solutions.Day12;
+using AoC_2023.Solutions.Day13;
+using AoC_2023.Solutions.Day14;
+using AoC_2023.Solutions.Day15;
 
 namespace AoC_2023
 {
@@ -51,6 +61,16 @@ namespace AoC_2023
                 3 => new SolverDay3(inputService),
                 4 => new SolverDay4(inputService),
                 5 => new SolverDay5(inputService),
+                6 => new SolverDay6(inputService),
+                7 => new SolverDay7(inputService),
+                8 => new SolverDay8(inputService),
+                9 => new SolverDay9(inputService),
+                10 => new SolverDay10(inputService),
+                11 => new SolverDay11(inputService),
+                12 => new SolverDay12(inputService),
+                13 => new SolverDay13(inputService),
+                14 => new SolverDay14(inputService),
+                15 => new SolverDay15(inputService),
                 _ => null,
             };
         }

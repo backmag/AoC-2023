@@ -22,7 +22,6 @@ packages/
 *.DS_Store
 
 # Visual Studio files
-*.sln
 *.csproj.user
 *.suo
 *.cache

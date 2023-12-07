@@ -1,5 +1,4 @@
 ﻿using System.Numerics;
-using System.Security.Cryptography.X509Certificates;
 
 namespace AoC_2023.Solutions.Day5
 {

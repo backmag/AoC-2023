@@ -5,7 +5,11 @@ namespace AoC_2023.Solutions.Day7
         [Fact]
         public void TestPartOne()
         {
-            var input = InputService.SplitToArray(@"");
+            var input = InputService.SplitToArray(@"32T3K 765
+T55J5 684
+KK677 28
+KTJJT 220
+QQQJA 483");
             var expected = 0;
 
             SolverDay7 solver = new(new InputService(input));

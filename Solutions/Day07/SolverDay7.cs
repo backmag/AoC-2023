@@ -11,14 +11,48 @@
         public override int SolvePartOne()
         {
             var input = GetInput();
-
-            return 0;
+            var hands = CreateHands(input);
+            hands.Sort();
+            var idx = 0;
+            var result = 0; 
+            while (idx < hands.Count)
+            {
+                result += hands[idx].BidAmount * (idx + 1);
+                idx += 1; 
+            }
+            return result;
         }
-
+        public List<Hand> CreateHands(string[] input)
+        {
+            List<Hand> result = new List<Hand>();
+            foreach (var line in input)
+            {
+                result.Add(new Hand(line.Split(" ").First(), int.Parse(line.Split(" ").Last())));
+            }
+            return result;
+        }
+        public List<JokerHand> CreateJokerHands(string[] input)
+        {
+            List<JokerHand> result = new List<JokerHand>();
+            foreach (var line in input)
+            {
+                result.Add(new JokerHand(line.Split(" ").First(), int.Parse(line.Split(" ").Last())));
+            }
+            return result;
+        }
         public override int SolvePartTwo()
         {
             var input = GetInput();
-            return 0;
+            var hands = CreateJokerHands(input);
+            hands.Sort();
+            var idx = 0;
+            var result = 0;
+            while (idx < hands.Count)
+            {
+                result += hands[idx].BidAmount * (idx + 1);
+                idx += 1;
+            }
+            return result;
         }
 
         public string[] GetInput()

@@ -28,13 +28,18 @@ namespace AoC_2023
         }
         public static void Main(string[] args)
         {
+<<<<<<< HEAD
             string day = "08";
+=======
+            var day = "07";
+>>>>>>> 0a1a966696a9d944349a579e88f6273a959b4fe4
 
             var inputPath = GetInputPathForDay(day);
 
             var inputService = new InputService(inputPath);
 
             var solver = FetchSolverByDay(day, inputService);
+            
 
             if (solver != null)
             {

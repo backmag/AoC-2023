@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace AoC_2023.Solutions.Day5
+namespace AoC_2023.Solutions.Day05
 {
     public class SolverDay5 : Solver
     {
@@ -53,7 +53,6 @@ namespace AoC_2023.Solutions.Day5
             var seedRange = new SeedRange(input[0].Split(":").Last().Trim());
 
             var mappers = CreateMappers(input[2..]);
-            mappers.Reverse();
 
             BigInteger locationValue = 0;
             bool isValidLocation = false;
@@ -138,10 +137,10 @@ namespace AoC_2023.Solutions.Day5
 
         public class Mapper
         {
-            private string mapperName;
-            private List<BigInteger> inputs = new List<BigInteger>();
-            private List<BigInteger> outputs = new List<BigInteger>();
-            private List<BigInteger> lengths = new List<BigInteger>();
+            private readonly string mapperName;
+            private readonly List<BigInteger> inputs = new List<BigInteger>();
+            private readonly List<BigInteger> outputs = new List<BigInteger>();
+            private readonly List<BigInteger> lengths = new List<BigInteger>();
 
             public Mapper(string[] mapStrings)
             {

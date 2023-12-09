@@ -1,9 +1,7 @@
-﻿using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
-using System.Data;
+﻿using System.Data;
 using System.Text.RegularExpressions;
-using Xunit.Sdk;
 
-namespace AoC_2023.Solutions.Day3
+namespace AoC_2023.Solutions.Day03
 {
     public class SolverDay3 : Solver
     {

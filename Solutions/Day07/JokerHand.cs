@@ -1,11 +1,4 @@
-﻿using Microsoft.VisualBasic;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AoC_2023.Solutions.Day7
+﻿namespace AoC_2023.Solutions.Day07
 {
     public class JokerHand : IComparable
     {

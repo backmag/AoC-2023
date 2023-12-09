@@ -1,7 +1,6 @@
-﻿
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
-namespace AoC_2023.Solutions.Day1
+namespace AoC_2023.Solutions.Day01
 {
     public class SolverDay1 : Solver
     {

@@ -1,12 +1,12 @@
-﻿using AoC_2023.Solutions.Day1;
+﻿using AoC_2023.Solutions.Day01;
 using AoC_2023.Solutions.Day2;
-using AoC_2023.Solutions.Day3;
-using AoC_2023.Solutions.Day4;
-using AoC_2023.Solutions.Day5;
-using AoC_2023.Solutions.Day6;
-using AoC_2023.Solutions.Day7;
-using AoC_2023.Solutions.Day8;
-using AoC_2023.Solutions.Day9;
+using AoC_2023.Solutions.Day03;
+using AoC_2023.Solutions.Day04;
+using AoC_2023.Solutions.Day05;
+using AoC_2023.Solutions.Day06;
+using AoC_2023.Solutions.Day07;
+using AoC_2023.Solutions.Day08;
+using AoC_2023.Solutions.Day09;
 using AoC_2023.Solutions.Day10;
 using AoC_2023.Solutions.Day11;
 using AoC_2023.Solutions.Day12;
@@ -28,7 +28,7 @@ namespace AoC_2023
         }
         public static void Main(string[] args)
         {
-            string day = "08";
+            string day = "05";
 
             var inputPath = GetInputPathForDay(day);
 

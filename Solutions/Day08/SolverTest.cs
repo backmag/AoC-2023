@@ -1,4 +1,4 @@
-namespace AoC_2023.Solutions.Day8
+namespace AoC_2023.Solutions.Day08
 {
     public class SolverTest
     {

@@ -1,4 +1,4 @@
-﻿namespace AoC_2023.Solutions.Day2
+﻿namespace AoC_2024.Solutions.Day02
 {
     public class SolverDay2 : Solver
     {

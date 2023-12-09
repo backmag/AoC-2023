@@ -1,6 +1,6 @@
 using System.Numerics;
 
-namespace AoC_2023.Solutions.Day5
+namespace AoC_2023.Solutions.Day05
 {
     public class SolverTest
     {

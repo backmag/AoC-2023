@@ -14,12 +14,13 @@ using AoC_2023.Solutions.Day13;
 using AoC_2023.Solutions.Day14;
 using AoC_2023.Solutions.Day15;
 
+
 namespace AoC_2023
 {
     class Program
     {
 
-        static string GetInputPathForDay(int day)
+        static string GetInputPathForDay(string day)
         {
             string projectDirectory = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.Parent.FullName;
             string inputPath = projectDirectory + $"\\Solutions\\Day{day}\\input.txt";
@@ -27,7 +28,7 @@ namespace AoC_2023
         }
         public static void Main(string[] args)
         {
-            int day = 5;
+            string day = "08";
 
             var inputPath = GetInputPathForDay(day);
 
@@ -52,25 +53,25 @@ namespace AoC_2023
             }
         }
 
-        private static Solver? FetchSolverByDay(int day, InputService inputService)
+        private static Solver? FetchSolverByDay(string day, InputService inputService)
         {
             return day switch
             {
-                1 => new SolverDay1(inputService),
-                2 => new SolverDay2(inputService),
-                3 => new SolverDay3(inputService),
-                4 => new SolverDay4(inputService),
-                5 => new SolverDay5(inputService),
-                6 => new SolverDay6(inputService),
-                7 => new SolverDay7(inputService),
-                8 => new SolverDay8(inputService),
-                9 => new SolverDay9(inputService),
-                10 => new SolverDay10(inputService),
-                11 => new SolverDay11(inputService),
-                12 => new SolverDay12(inputService),
-                13 => new SolverDay13(inputService),
-                14 => new SolverDay14(inputService),
-                15 => new SolverDay15(inputService),
+                "01" => new SolverDay1(inputService),
+                "02" => new SolverDay2(inputService),
+                "03" => new SolverDay3(inputService),
+                "04" => new SolverDay4(inputService),
+                "05" => new SolverDay5(inputService),
+                "06" => new SolverDay6(inputService),
+                "07" => new SolverDay7(inputService),
+                "08" => new SolverDay8(inputService),
+                "09" => new SolverDay9(inputService),
+                "10" => new SolverDay10(inputService),
+                "11" => new SolverDay11(inputService),
+                "12" => new SolverDay12(inputService),
+                "13" => new SolverDay13(inputService),
+                "14" => new SolverDay14(inputService),
+                "15" => new SolverDay15(inputService),
                 _ => null,
             };
         }

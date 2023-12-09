@@ -8,7 +8,7 @@ namespace AoC_2023.Solutions.Day12
             var input = InputService.SplitToArray(@"");
             var expected = 0;
 
-            SolverDay10 solver = new(new InputService(input));
+            SolverDay12 solver = new(new InputService(input));
             var actual = solver.SolvePartOne();
 
             Assert.Equal(expected, actual);
@@ -21,7 +21,7 @@ namespace AoC_2023.Solutions.Day12
 
             var expected = 0;
 
-            SolverDay10 solver = new(new InputService(input));
+            SolverDay12 solver = new(new InputService(input));
             var actual = solver.SolvePartTwo();
 
             Assert.Equal(expected, actual);

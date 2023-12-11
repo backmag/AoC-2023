@@ -1,5 +1,5 @@
 ﻿using AoC_2023.Solutions.Day01;
-using AoC_2023.Solutions.Day2;
+using AoC_2023.Solutions.Day02;
 using AoC_2023.Solutions.Day03;
 using AoC_2023.Solutions.Day04;
 using AoC_2023.Solutions.Day05;
@@ -28,7 +28,7 @@ namespace AoC_2023
         }
         public static void Main(string[] args)
         {
-            string day = "05";
+            string day = "10";
 
             var inputPath = GetInputPathForDay(day);
 

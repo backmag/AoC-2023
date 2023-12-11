@@ -64,7 +64,7 @@ namespace AoC_2023.Solutions.Day10
             /* 
              * Figure out direction of movement, and add all tiles to the right of the walker (which is not in the walker path). 
              * for each of the added tiles, expand in all directions to search for more tiles around them.
-             * Further expand one step for all of the new tiles, until no new tiles are found. 
+             * 
              */
 
             return 0;

@@ -10,7 +10,7 @@ namespace AoC_2023.Solutions.Day08
             _inputService = inputService;
         }
 
-        public override int SolvePartOne()
+        public override BigInteger SolvePartOne()
         {
             var input = GetInput();
             var directionHandler = new DirectionHandler(input[0]);
@@ -22,7 +22,7 @@ namespace AoC_2023.Solutions.Day08
             {
                 currentValue = directionMap[currentValue][directionHandler.GetNextDirection()];
             }
-            return (int)directionHandler.GetSteps();
+            return (BigInteger)directionHandler.GetSteps();
         }
         public Dictionary<string, List<string>> CreateDirectionMap(string[] input)
         {
@@ -37,7 +37,7 @@ namespace AoC_2023.Solutions.Day08
             return retDict;
         }
 
-        public override int SolvePartTwo()
+        public override BigInteger SolvePartTwo()
         {
             var input = GetInput();
             var directionMap = CreateDirectionMap(input[2..]);
@@ -50,8 +50,7 @@ namespace AoC_2023.Solutions.Day08
                 steps.Add(GetStepsInCyclus(node, directionMap, directionHandler));
             }
             var result = FindLeastCommonMultipleOfList(steps);
-            Console.WriteLine("Total length: " + result);
-            return (int)steps.Aggregate((acc, x) => acc * x);
+            return (BigInteger)result;
         }
         public BigInteger FindLeastCommonMultipleOfList(List<BigInteger> nbrs)
         {

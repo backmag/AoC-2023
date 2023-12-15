@@ -1,4 +1,6 @@
-﻿namespace AoC_2023.Solutions.Day02
+﻿using System.Numerics;
+
+namespace AoC_2023.Solutions.Day02
 {
     public class SolverDay2 : Solver
     {
@@ -8,7 +10,7 @@
             _inputService = inputService;
         }
 
-        public override int SolvePartOne()
+        public override BigInteger SolvePartOne()
         {
             var input = GetInput();
 
@@ -30,10 +32,10 @@
                     validGames.Add(gameNbr);
                 }
             }
-            return validGames.Sum();
+            return (BigInteger)validGames.Sum();
         }
 
-        public override int SolvePartTwo()
+        public override BigInteger SolvePartTwo()
         {
             var input = GetInput();
             var powerList = new List<int>();
@@ -44,7 +46,7 @@
                 var minByColor = GetMinimumByColor(picks);
                 powerList.Add(CalculatePower(minByColor));
             }
-            return powerList.Sum();
+            return (BigInteger)powerList.Sum();
         }
 
         public string[] GetInput()

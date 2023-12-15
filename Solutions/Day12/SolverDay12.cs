@@ -8,14 +8,14 @@
             _inputService = inputService;
         }
 
-        public override int SolvePartOne()
+        public override BigInteger SolvePartOne()
         {
             var input = GetInput();
 
             return 0;
         }
 
-        public override int SolvePartTwo()
+        public override BigInteger SolvePartTwo()
         {
             var input = GetInput();
             return 0;

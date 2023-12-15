@@ -8,7 +8,7 @@ public class SolverDay4 : Solver
         _inputService = inputService;
     }
 
-    public override int SolvePartOne()
+    public override BigInteger SolvePartOne()
     {
         var input = GetInput();
         var totalPoints = 0;
@@ -22,24 +22,9 @@ public class SolverDay4 : Solver
             }
         }
 
-        return totalPoints;
+        return (BigInteger)totalPoints;
     }
-
-    public static int GetGameNumber(string line)
-    {
-        return int.Parse(line.Split(':').First().Split(" ").Last());
-    }
-    public static List<int> GetWinningNumbers(string line)
-    {
-        return line.Split(":").Last().Split("|").First().Trim().Split(" ").Where(e => e.Trim() != "").Select(e => int.Parse(e)).ToList();
-    }
-
-    public static List<int> GetMyNumbers(string line)
-    {
-        return line.Split(":").Last().Split("|").Last().Trim().Split(" ").Where(e => e.Trim() != "").Select(e => int.Parse(e)).ToList();
-    }
-
-    public override int SolvePartTwo()
+    public override BigInteger SolvePartTwo()
     {
         var input = GetInput();
         var nbrInstancesOfCards = Enumerable.Repeat(1, input.Length).ToList();
@@ -57,8 +42,23 @@ public class SolverDay4 : Solver
             }
             gameNbr++;
         }
-        return nbrInstancesOfCards.Sum();
+        return (BigInteger) nbrInstancesOfCards.Sum();
     }
+
+    public static int GetGameNumber(string line)
+    {
+        return int.Parse(line.Split(':').First().Split(" ").Last());
+    }
+    public static List<int> GetWinningNumbers(string line)
+    {
+        return line.Split(":").Last().Split("|").First().Trim().Split(" ").Where(e => e.Trim() != "").Select(e => int.Parse(e)).ToList();
+    }
+
+    public static List<int> GetMyNumbers(string line)
+    {
+        return line.Split(":").Last().Split("|").Last().Trim().Split(" ").Where(e => e.Trim() != "").Select(e => int.Parse(e)).ToList();
+    }
+
 
     public static int GetNumberMatches(string line)
     {

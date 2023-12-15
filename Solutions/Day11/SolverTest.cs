@@ -27,9 +27,18 @@ namespace AoC_2023.Solutions.Day11
         [Fact]
         public void TestPartTwo()
         {
-            var input = InputService.SplitToArray(@"");
+            var input = InputService.SplitToArray(@"...#......
+.......#..
+#.........
+..........
+......#...
+.#........
+.........#
+..........
+.......#..
+#...#.....");
 
-            var expected = 0;
+            var expected = 1030;
 
             SolverDay11 solver = new(new InputService(input));
             var actual = solver.SolvePartTwo();

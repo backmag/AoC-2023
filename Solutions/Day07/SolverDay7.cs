@@ -8,19 +8,19 @@
             _inputService = inputService;
         }
 
-        public override int SolvePartOne()
+        public override BigInteger SolvePartOne()
         {
             var input = GetInput();
             var hands = CreateHands(input);
             hands.Sort();
             var idx = 0;
-            var result = 0; 
+            var result = 0;
             while (idx < hands.Count)
             {
                 result += hands[idx].BidAmount * (idx + 1);
-                idx += 1; 
+                idx += 1;
             }
-            return result;
+            return (BigInteger)result;
         }
         public List<Hand> CreateHands(string[] input)
         {
@@ -40,7 +40,7 @@
             }
             return result;
         }
-        public override int SolvePartTwo()
+        public override BigInteger SolvePartTwo()
         {
             var input = GetInput();
             var hands = CreateJokerHands(input);
@@ -52,7 +52,7 @@
                 result += hands[idx].BidAmount * (idx + 1);
                 idx += 1;
             }
-            return result;
+            return (BigInteger)result;
         }
 
         public string[] GetInput()

@@ -8,7 +8,7 @@
             _inputService = inputService;
         }
 
-        public override int SolvePartOne()
+        public override BigInteger SolvePartOne()
         {
             var input = GetInput();
             var extrapolatedSum = 0;
@@ -17,10 +17,10 @@
             {
                 extrapolatedSum += ExtrapolateOasis(line.Split(" ").Select(e => int.Parse(e)).ToList());
             }
-            return extrapolatedSum;
+            return (BigInteger)extrapolatedSum;
         }
 
-        public override int SolvePartTwo()
+        public override BigInteger SolvePartTwo()
         {
             var input = GetInput();
             var extrapolatedSum = 0;
@@ -31,7 +31,7 @@
                     line.Split(" ").Select(e => int.Parse(e)).ToList(),
                     forward: false);
             }
-            return extrapolatedSum;
+            return (BigInteger)extrapolatedSum;
         }
 
         public string[] GetInput()

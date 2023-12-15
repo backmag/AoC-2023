@@ -10,7 +10,7 @@ namespace AoC_2023.Solutions.Day05
             _inputService = inputService;
         }
 
-        public override int SolvePartOne()
+        public override BigInteger SolvePartOne()
         {
             var input = GetInput();
             var seeds = input[0].Split(":").Last().Trim().Split(" ").Select(e => BigInteger.Parse(e)).ToList();
@@ -26,7 +26,7 @@ namespace AoC_2023.Solutions.Day05
                     minSeed = newSeed;
                 }
             }
-            return (int)minSeed;
+            return (BigInteger)minSeed;
         }
 
         public static List<Mapper> CreateMappers(string[] input)
@@ -47,7 +47,7 @@ namespace AoC_2023.Solutions.Day05
             return mappers;
         }
 
-        public override int SolvePartTwo()
+        public override BigInteger SolvePartTwo()
         {
             var input = GetInput();
             var seedRange = new SeedRange(input[0].Split(":").Last().Trim());
@@ -64,7 +64,7 @@ namespace AoC_2023.Solutions.Day05
                 {
                     Console.WriteLine($"Success! Found for {seedValue}, starting at {locationValue}");
                     ReversePass(locationValue, mappers, true);
-                    return (int)locationValue;
+                    return (BigInteger)locationValue;
                 }
                 else
                 {
@@ -76,7 +76,7 @@ namespace AoC_2023.Solutions.Day05
                 }
             }
 
-            return (int)locationValue;
+            return (BigInteger)locationValue;
 
         }
 

@@ -11,7 +11,7 @@ namespace AoC_2023.Solutions.Day03
             _inputService = inputService;
         }
 
-        public override int SolvePartOne()
+        public override BigInteger SolvePartOne()
         {
             var input = GetInput();
             int lineIndex = 0;
@@ -35,7 +35,24 @@ namespace AoC_2023.Solutions.Day03
                 }
                 lineIndex++;
             }
-            return validEngineParts.Sum();
+            return (BigInteger)validEngineParts.Sum();
+        }
+        public override BigInteger SolvePartTwo()
+        {
+            var input = GetInput();
+            var gears = FindAllGears(input);
+            var totalRatio = 0;
+
+            foreach (var gear in gears)
+            {
+                var gearRow = gear.Item1;
+                var gearCol = gear.Item2;
+
+                var gearRatio = GetGearRatio(input, gearRow, gearCol);
+
+                totalRatio += gearRatio;
+            }
+            return (BigInteger)totalRatio;
         }
 
         public static string[] ExtractNumbers(string line)
@@ -108,24 +125,6 @@ namespace AoC_2023.Solutions.Day03
         {
             var pattern = "[^\\d|^\\.]";
             return Regex.Match(str, pattern).Success;
-        }
-
-        public override int SolvePartTwo()
-        {
-            var input = GetInput();
-            var gears = FindAllGears(input);
-            var totalRatio = 0;
-
-            foreach (var gear in gears)
-            {
-                var gearRow = gear.Item1;
-                var gearCol = gear.Item2;
-
-                var gearRatio = GetGearRatio(input, gearRow, gearCol);
-
-                totalRatio += gearRatio;
-            }
-            return totalRatio;
         }
 
         public static int GetGearRatio(string[] input, int gearRow, int gearCol)

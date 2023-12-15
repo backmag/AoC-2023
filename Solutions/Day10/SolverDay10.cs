@@ -9,7 +9,7 @@ namespace AoC_2023.Solutions.Day10
             _inputService = inputService;
         }
 
-        public override int SolvePartOne()
+        public override BigInteger SolvePartOne()
         {
             var input = GetInput();
 
@@ -28,7 +28,7 @@ namespace AoC_2023.Solutions.Day10
                     atStartPos = true;
                 }
             }
-            return (int)(walker.GetNbrSteps() / 2);
+            return (BigInteger)(walker.GetNbrSteps() / 2);
         }
 
         public static Tuple<int, int> FindStartCoordinates(string[] input)
@@ -40,7 +40,7 @@ namespace AoC_2023.Solutions.Day10
         }
 
 
-        public override int SolvePartTwo()
+        public override BigInteger SolvePartTwo()
         {
             var input = GetInput();
 

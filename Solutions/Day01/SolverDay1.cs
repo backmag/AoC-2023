@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Numerics;
+using System.Text.RegularExpressions;
 
 namespace AoC_2023.Solutions.Day01
 {
@@ -11,7 +12,7 @@ namespace AoC_2023.Solutions.Day01
             _inputService = inputService;
 
         }
-        public override int SolvePartOne()
+        public override BigInteger SolvePartOne()
         {
             var lines = GetInput();
             var coordinates = new List<int>();
@@ -20,10 +21,10 @@ namespace AoC_2023.Solutions.Day01
             {
                 coordinates.Add(ExtractCoordinates(line, pattern));
             }
-            return coordinates.Sum();
+            return (BigInteger)coordinates.Sum();
         }
 
-        public override int SolvePartTwo()
+        public override BigInteger SolvePartTwo()
         {
             var lines = GetInput();
             var coordinates = new List<int>();
@@ -41,7 +42,7 @@ namespace AoC_2023.Solutions.Day01
                     .Replace("nine", "n9e");
                 coordinates.Add(ExtractCoordinates(replacedString, pattern));
             }
-            return coordinates.Sum();
+            return (BigInteger)coordinates.Sum();
         }
 
         public static int ExtractCoordinates(string line, string pattern)

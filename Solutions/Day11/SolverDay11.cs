@@ -32,7 +32,8 @@ namespace AoC_2023.Solutions.Day11
             var universeHeight = input.Length;
             var galaxies = CreateGalaxies(input);
 
-            var expansionFactor = 1000000;
+            //var expansionFactor = 1000000;
+            var expansionFactor = 10;
             var expandedGalaxies = ExpandUniverse(galaxies, universeWidth, universeHeight, expansionFactor);
             var (newWidth, newHeight) = GetNewMetrics(expandedGalaxies);
             var shortestPaths = CalculateShortestPath(expandedGalaxies);

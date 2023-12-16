@@ -1,4 +1,8 @@
 ﻿
+using System.ComponentModel.Design;
+using System.Reflection;
+using System.Xml;
+
 namespace AoC_2023.Solutions.Day10
 {
     public class SolverDay10 : Solver
@@ -31,14 +35,6 @@ namespace AoC_2023.Solutions.Day10
             return (BigInteger)(walker.GetNbrSteps() / 2);
         }
 
-        public static Tuple<int, int> FindStartCoordinates(string[] input)
-        {
-            var query = input.Select(
-                (str, index) => new { Index = index, CharIndex = str.IndexOf('S') }).
-                FirstOrDefault(e => e.CharIndex != -1);
-            return new Tuple<int, int>(query.CharIndex, query.Index);
-        }
-
 
         public override BigInteger SolvePartTwo()
         {
@@ -50,24 +46,57 @@ namespace AoC_2023.Solutions.Day10
             walker.TakeStep();
             bool atStartPos = false;
 
-            var pathCoordinates = new List<Tuple<int, int>>();
+            var pathTiles = new List<Tuple<int, int>>();
+            pathTiles.Add(Tuple.Create(startX, startY));
             while (!atStartPos)
             {
                 walker.TakeStep();
                 var (newX, newY) = walker.GetCurrentTile();
-                pathCoordinates.Add(new Tuple<int, int>(newX, newY));
+                pathTiles.Add(new Tuple<int, int>(newX, newY));
                 if (newX == startX && newY == startY)
                 {
                     atStartPos = true;
                 }
             }
-            /* 
-             * Figure out direction of movement, and add all tiles to the right of the walker (which is not in the walker path). 
-             * for each of the added tiles, expand in all directions to search for more tiles around them.
-             * 
-             */
+            walker.ResetToStart();
+            var currentCenterTiles = walker.GetInitialCenterTiles(pathTiles);
+            Console.WriteLine($"Nbr starting tiles: {currentCenterTiles.Count()}");
+            bool isExpanding = true;
 
-            return 0;
+            while (isExpanding)
+            {
+                var newCenterTiles = walker.ExpandAroundTiles(currentCenterTiles, pathTiles);
+                if (newCenterTiles.Count() == currentCenterTiles.Count())
+                {
+                    isExpanding = false;
+                }
+                else
+                {
+                    currentCenterTiles = newCenterTiles;
+                    Console.WriteLine($"New expansion. Number of tiles: {currentCenterTiles.Count()}");
+                }
+            }
+            var potentialSolutions = new List<int> {
+                currentCenterTiles.Count(),
+                input.Length * input[0].Length - pathTiles.Count() - currentCenterTiles.Count()
+            };
+            potentialSolutions.Sort();
+            Console.WriteLine($"Potential solutions: {potentialSolutions.First()} or {potentialSolutions.Last()}");
+            return (BigInteger)potentialSolutions.First();
+        }
+
+        /* 5412 Too high
+         * 808 Too high
+         * 521 Too low! 
+         * 530 WRONG 
+         */
+
+        public static Tuple<int, int> FindStartCoordinates(string[] input)
+        {
+            var query = input.Select(
+                (str, index) => new { Index = index, CharIndex = str.IndexOf('S') }).
+                FirstOrDefault(e => e.CharIndex != -1);
+            return new Tuple<int, int>(query.CharIndex, query.Index);
         }
 
         public string[] GetInput()
@@ -87,6 +116,8 @@ namespace AoC_2023.Solutions.Day10
         private const char STARTING_POSITION = 'S';
 
         private readonly string[] PipeMap;
+        private int StartX;
+        private int StartY;
         private int CurrentX;
         private int CurrentY;
         private int PreviousX;
@@ -102,7 +133,142 @@ namespace AoC_2023.Solutions.Day10
             CurrentY = startY;
             PrintProgress = printProgress;
             Direction = direction;
+            StartX = startX;
+            StartY = startY;
         }
+
+        public void ResetToStart()
+        {
+            CurrentX = StartX;
+            CurrentY = StartY;
+            PreviousX = 0;
+            PreviousY = 0;
+            NbrSteps = 0;
+        }
+
+        public List<Tuple<int, int>> ExpandAroundTiles(List<Tuple<int, int>> tilesToExpand, List<Tuple<int, int>> pathTiles)
+        {
+            var updatedTiles = tilesToExpand.Select(e => Tuple.Create(e.Item1, e.Item2)).ToList();
+
+            foreach (var tile in tilesToExpand)
+            {
+                var adjacentTiles = GetAdjacentTiles(tile);
+                foreach (var adjacentTile in adjacentTiles)
+                {
+                    if (!pathTiles.Where(e => e.Item1 == adjacentTile.Item1 && e.Item2 == adjacentTile.Item2).Any() &&
+                        !updatedTiles.Where(e => e.Item1 == adjacentTile.Item1 && e.Item2 == adjacentTile.Item2).Any() &&
+                        adjacentTile.Item1 > 0 &&
+                        adjacentTile.Item1 < PipeMap[0].Length &&
+                        adjacentTile.Item2 > 0 &&
+                        adjacentTile.Item2 < PipeMap.Length)
+                    {
+                        updatedTiles.Add(adjacentTile);
+                    }
+                }
+            }
+            return updatedTiles;
+        }
+
+        public List<Tuple<int, int>> GetAdjacentTiles(Tuple<int, int> tile)
+        {
+            var adjacentTiles = new List<Tuple<int, int>>();
+            foreach (var x in Enumerable.Range(-1, 3))
+            {
+                foreach (var y in Enumerable.Range(-1, 3))
+                {
+                    adjacentTiles.Add(Tuple.Create(tile.Item1 + x, tile.Item2 + y));
+                }
+            }
+            return adjacentTiles;
+        }
+
+        public List<Tuple<int, int>> GetInitialCenterTiles(List<Tuple<int, int>> pathTiles)
+        {
+            var initialTiles = new List<Tuple<int, int>>();
+
+            TakeStep();
+
+            while (!IsAtStart())
+            {
+                var tileCandidate = GetTileToDirection();
+
+                if (!initialTiles.Where(e => e.Item1 == tileCandidate.Item1 && e.Item2 == tileCandidate.Item2).Any() &&
+                     !pathTiles.Where(e => e.Item1 == tileCandidate.Item1 && e.Item2 == tileCandidate.Item2).Any() &&
+                     tileCandidate.Item1 > 0 &&
+                     tileCandidate.Item1 < PipeMap[0].Length &&
+                     tileCandidate.Item2 > 0 &&
+                     tileCandidate.Item2 < PipeMap.Length)
+                {
+                    initialTiles.Add(tileCandidate);
+                }
+                TakeStep();
+            }
+            return initialTiles;
+        }
+
+        public bool IsAtStart()
+        {
+            return CurrentX == StartX && CurrentY == StartY;
+        }
+        private Tuple<int, int> GetTileToDirection()
+        {
+            var (nextX, nextY) = GetNextTile();
+            if (nextX == CurrentX)
+            {
+                // Moving vertically
+                if (nextY < CurrentY)
+                {
+                    if (Direction == 'R')
+                    {
+                        return Tuple.Create(CurrentX - 1, CurrentY);
+                    }
+                    else
+                    {
+                        return Tuple.Create(CurrentX + 1, CurrentY);
+                    }
+                }
+                else
+                {
+                    if (Direction == 'R')
+                    {
+                        return Tuple.Create(CurrentX + 1, CurrentY);
+                    }
+                    else
+                    {
+                        return Tuple.Create(CurrentX - 1, CurrentY);
+                    }
+                }
+            }
+            else
+            {
+                // Moving horizontally
+                if (nextX < CurrentX)
+                {
+                    if (Direction == 'R')
+                    {
+                        return Tuple.Create(CurrentX, CurrentY + 1);
+                    }
+                    else
+                    {
+                        return Tuple.Create(CurrentX, CurrentY - 1);
+                    }
+                }
+                else
+                {
+                    if (Direction == 'R')
+                    {
+                        return Tuple.Create(CurrentX, CurrentY - 1);
+                    }
+                    else
+                    {
+                        return Tuple.Create(CurrentX, CurrentY + 1);
+                    }
+
+                }
+            }
+            return null;
+        }
+
 
         public void TakeStep()
         {
@@ -112,7 +278,10 @@ namespace AoC_2023.Solutions.Day10
             CurrentX = newX;
             CurrentY = newY;
             NbrSteps++;
-            PrintPosition(3);
+            if (PrintProgress)
+            {
+                PrintPosition(3);
+            }
         }
 
         public int GetNbrSteps()

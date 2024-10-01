@@ -266,7 +266,6 @@ namespace AoC_2023.Solutions.Day10
 
                 }
             }
-            return null;
         }
 
 

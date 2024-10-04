@@ -28,7 +28,7 @@ namespace AoC_2023
         }
         public static void Main(string[] args)
         {
-            string day = "12";
+            string day = "13";
             var inputPath = GetInputPathForDay(day);
             var inputService = new InputService(inputPath);
 
